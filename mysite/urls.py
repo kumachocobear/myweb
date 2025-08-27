@@ -3,5 +3,5 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('video.urls')),  # หน้าเว็บหลักเข้าถึง index
+    path('video/', include('video.urls')),  # หน้าเว็บหลักเข้าถึง index
 ]
