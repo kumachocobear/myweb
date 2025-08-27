@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Video Player</title>
+    <style>
+        body {
+            display: flex;
+            font-family: Inter;
+            flex-direction: column; /* จัดแนวตั้ง */
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: #000;
+            color: #fff; /* ข้อความสีขาว */
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        video {
+            width: 80%;
+            max-width: 800px;
+            border: 2px solid #fff;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <h1>ดูวิดีโอออนไลน์</h1>
+    <video controls controlsList="nodownload" oncontextmenu="return false;">
+        <source src="{% url 'stream_video' %}" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <script>
+        // ป้องกันคลิกขวาทั้งหน้า
+        document.addEventListener('contextmenu', event => event.preventDefault());
+    </script>
+</body>
+</html>
