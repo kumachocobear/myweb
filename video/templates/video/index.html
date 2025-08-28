@@ -51,6 +51,7 @@
     </style>
 </head>
 <body>
+    
     <h1>ดูวิดีโอออนไลน์</h1>
 
     <div class="video-container">
@@ -58,19 +59,20 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-    <script>
-        document.addEventListener('contextmenu', event => event.preventDefault());
+<script>
+    document.addEventListener('contextmenu', event => event.preventDefault());
 
-        const video = document.getElementById('video');
-        const videoUrl = "/private_hls/sample.m3u8";  
+    const video = document.getElementById('video');
+    const videoUrl = "{% url 'hls_stream' filename='sample/sample.m3u8' %}";
 
-        if (Hls.isSupported()) {
-            const hls = new Hls();
-            hls.loadSource(videoUrl);
-            hls.attachMedia(video);
-        } else {
-            video.src = videoUrl;
-        }
-    </script>
+    if (Hls.isSupported()) {
+        const hls = new Hls();
+        hls.loadSource(videoUrl);
+        hls.attachMedia(video);
+    } else {
+        video.src = videoUrl;
+    }
+</script>
+
 </body>
 </html>
