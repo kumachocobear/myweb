@@ -1,22 +1,23 @@
-import os
+import boto3
 from django.conf import settings
-from django.http import FileResponse, Http404
+from django.http import JsonResponse
 from django.shortcuts import render
 
 def index(request):
     return render(request, 'video/index.html')
 
 def hls_stream(request, filename):
-    file_path = os.path.join(settings.BASE_DIR, 'private_hls', filename)
+    s3_client = boto3.client(
+        's3',
+        aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
+        aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY,
+        region_name=settings.AWS_REGION_NAME
+    )
 
-    if not os.path.exists(file_path):
-        raise Http404("File not found")
+    url = s3_client.generate_presigned_url(
+        ClientMethod='get_object',
+        Params={'Bucket': settings.AWS_S3_BUCKET_NAME, 'Key': f'sample/{filename}'},
+        ExpiresIn=300
+    )
 
-    if file_path.endswith('.m3u8'):
-        content_type = 'application/vnd.apple.mpegurl'
-    elif file_path.endswith('.ts'):
-        content_type = 'video/MP2T'
-    else:
-        content_type = 'application/octet-stream'
-
-    return FileResponse(open(file_path, 'rb'), content_type=content_type)
+    return JsonResponse({'url': url})

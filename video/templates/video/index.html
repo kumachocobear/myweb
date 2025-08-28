@@ -55,24 +55,29 @@
     <h1>ดูวิดีโอออนไลน์</h1>
 
     <div class="video-container">
-        <video id="video" controls controlsList="nodownload" oncontextmenu="return false;"></video>
+    <video id="video" controls controlsList="nodownload" oncontextmenu="return false;"></video>
     </div>
-
+            
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 <script>
     document.addEventListener('contextmenu', event => event.preventDefault());
 
-    const video = document.getElementById('video');
-    const videoUrl = "{% url 'hls_stream' filename='sample/sample.m3u8' %}";
+    async function loadVideo() {
+            const response = await fetch("{% url 'hls_stream' filename='sample.m3u8' %}");
+            const data = await response.json();
+            const video = document.getElementById('video');
 
-    if (Hls.isSupported()) {
-        const hls = new Hls();
-        hls.loadSource(videoUrl);
-        hls.attachMedia(video);
-    } else {
-        video.src = videoUrl;
-    }
-</script>
+            if (Hls.isSupported()) {
+                const hls = new Hls();
+                hls.loadSource(data.url);
+                hls.attachMedia(video);
+            } else {
+                video.src = data.url;
+            }
+        }
+
+        loadVideo();
+    </script>
 
 </body>
 </html>
