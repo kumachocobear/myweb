@@ -2,40 +2,73 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Video Player</title>
+    <title>Video Streaming Online</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
         body {
+            font-family: 'Inter', sans-serif;
             display: flex;
-            font-family: Inter;
-            flex-direction: column; 
-            justify-content: center;
+            flex-direction: column;
+            justify-content: flex-start;
             align-items: center;
-            height: 100vh;
-            margin: 0;
-            background: #000;
-            color: #fff; 
+            min-height: 100vh;
+            background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
+            color: #fff;
+            padding: 20px;
         }
+
         h1 {
-            margin-bottom: 20px;
+            margin: 30px 0;
+            font-size: 2.2rem;
+            text-align: center;
+            background: linear-gradient(90deg, #ff7e5f, #feb47b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+        }
+
         video {
-            width: 80%;
-            max-width: 800px;
-            border: 2px solid #fff;
-            border-radius: 8px;
+            width: 100%;
+            height: auto;
+            display: block;
+            background: #000;
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 1.8rem; }
+            .video-container { max-width: 100%; }
         }
     </style>
 </head>
 <body>
     <h1>ดูวิดีโอออนไลน์</h1>
-    <video controls controlsList="nodownload" oncontextmenu="return false;">
-        <source src="{% url 'stream_video' %}" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
 
+    <div class="video-container">
+        <video id="video" controls controlsList="nodownload" oncontextmenu="return false;"></video>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <script>
-
         document.addEventListener('contextmenu', event => event.preventDefault());
+
+        const video = document.getElementById('video');
+        if (Hls.isSupported()) {
+            const hls = new Hls();
+            hls.loadSource('{% static "video/hls/sample.m3u8" %}');
+            hls.attachMedia(video);
+        } else {
+            video.src = '{% static "video/hls/sample.m3u8" %}';
+        }
     </script>
 </body>
 </html>
