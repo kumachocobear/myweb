@@ -35,3 +35,5 @@ Thumbs.db
 # Static (เก็บเฉพาะที่ collectstatic สร้างใหม่)
 static/
 staticfiles/
+
+GIT_LFS_SHEET.md
