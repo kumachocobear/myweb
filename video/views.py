@@ -22,7 +22,7 @@ def stream_video(request):
     end = file_size - 1
 
     if range_header:
-        # ตัวอย่าง Range: "bytes=0-1023"
+
         try:
             bytes_range = range_header.replace('bytes=', '').split('-')
             if bytes_range[0]:
@@ -30,7 +30,7 @@ def stream_video(request):
             if len(bytes_range) > 1 and bytes_range[1]:
                 end = int(bytes_range[1])
         except ValueError:
-            pass  # ถ้าแปลงไม่สำเร็จ ใช้ค่า default
+            pass  
 
     chunk_size = end - start + 1
 
