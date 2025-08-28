@@ -52,7 +52,7 @@ video/static/video/
 staticfiles/
 
 # Private HLS files
-mysite_video/private_hls/
+private_hls/
 
 # =====================
 # Notes / docs

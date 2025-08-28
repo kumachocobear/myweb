@@ -7,7 +7,7 @@ SECRET_KEY = 'django-insecure-8@rf^i6^0hod46+99%7mr+2@_j0a3&)3p(&oden1le1_1)rr_r
 
 
 DEBUG = False
-ALLOWED_HOSTS = ['myweb-6zn6.onrender.com','127.0.0.1', 'localhost', 'yourusername.pythonanywhere.com']
+ALLOWED_HOSTS = ['myweb-buvm.onrender.com','127.0.0.1', 'localhost', 'yourusername.pythonanywhere.com']
 
 
 INSTALLED_APPS = [
@@ -93,5 +93,5 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
-AWS_REGION_NAME = os.environ.get('AWS_REGION_NAME', 'ap-southeast-1')
-AWS_S3_BUCKET_NAME = os.environ.get('AWS_S3_BUCKET_NAME', 'kuma-hls-videos')
+AWS_S3_BUCKET_NAME = os.environ.get('AWS_S3_BUCKET_NAME')
+AWS_REGION_NAME = os.environ.get('AWS_REGION_NAME')
