@@ -1,4 +1,6 @@
+# =====================
 # Python
+# =====================
 __pycache__/
 *.py[cod]
 *.so
@@ -8,32 +10,47 @@ dist/
 build/
 .eggs/
 
+# =====================
 # Virtual environment
+# =====================
 venv/
 ENV/
 env/
 .venv/
 
+# =====================
 # Django
+# =====================
 *.log
 *.pot
 *.pyc
 *.sqlite3
 db.sqlite3
 
+# =====================
 # Media
-/media
+# =====================
+/media/
 
-# VSCode / IDE
+# =====================
+# IDE / Editor
+# =====================
 .vscode/
 .idea/
 
+# =====================
 # OS files
+# =====================
 .DS_Store
 Thumbs.db
 
-# Static (เก็บเฉพาะที่ collectstatic สร้างใหม่)
-static/
+# =====================
+# Static files
+# =====================
+# Ignore staticfiles (collectstatic output)
 staticfiles/
 
+# =====================
+# Notes / docs
+# =====================
 GIT_LFS_SHEET.md
