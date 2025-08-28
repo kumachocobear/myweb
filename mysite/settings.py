@@ -91,7 +91,7 @@ STATICFILES_DIRS = [BASE_DIR / 'video/static']
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
-AWS_ACCESS_KEY_ID = "REMOVED"
-AWS_SECRET_ACCESS_KEY = "REMOVED"
-AWS_REGION_NAME = "ap-southeast-1" 
-AWS_S3_BUCKET_NAME = "kuma-hls-videos"
+AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+AWS_REGION_NAME = os.environ.get('AWS_REGION_NAME', 'ap-southeast-1')
+AWS_S3_BUCKET_NAME = os.environ.get('AWS_S3_BUCKET_NAME', 'kuma-hls-videos')
